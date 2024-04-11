@@ -1,0 +1,18 @@
+{
+  "name": "mern_blog",
+  "version": "1.0.0",
+  "description": "MERN blog Project",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon"
+  },
+  "keywords": [],
+  "author": "Egan Victor",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
