@@ -1,2 +1,4 @@
 npm install -D concurrently
 // this tool allows us to run multiple commands concurrently, to start both front end and back end while developing
+//installing mongodb
+npm install --save mongodb
