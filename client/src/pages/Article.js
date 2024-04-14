@@ -1,16 +1,31 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import articleContent from './Article-content'
-
+import { useState, useEffect } from 'react'
 //Pages
 import NotFound from './NotFound'
 
 //components
 import Articles from '../components/Articles'
+import { fetch } from 'whatwg-fetch'
+import CommentsList from '../components/CommentsList'
+
 
 const Article = () => {
   const {name} =useParams();
   const article = articleContent.find((article)=>article.name === name)
+  const [articleInfo, setArticleInfo] = useState({comments: []})
+  useEffect(()=>{
+    const fetchData = async()=>{
+      const result = await fetch(`/api/articles/${name}`);
+      const  body = await result.json();
+      console.log(body);
+      setArticleInfo(body);
+    }
+    fetchData();
+    console.log('Components Mounted')
+  }, [name]);
+
   if (!article) return  <NotFound />  
   const otherArticles = articleContent.filter(article => article.name!== name )
   return (
@@ -21,6 +36,7 @@ const Article = () => {
       }
         
       )}
+      <CommentsList comments={articleInfo.comments}/>
       <h1 className='sm:text-2xl text-xl font-bold my-4 text-gray-900'>Other Articles</h1>
       <div className='flex flex-wrap -m-4 '>
         <Articles  articles={otherArticles}/>
