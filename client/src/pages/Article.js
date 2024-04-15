@@ -2,13 +2,15 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import articleContent from './Article-content'
 import { useState, useEffect } from 'react'
+import { fetch } from 'whatwg-fetch'
+
 //Pages
 import NotFound from './NotFound'
 
 //components
 import Articles from '../components/Articles'
-import { fetch } from 'whatwg-fetch'
 import CommentsList from '../components/CommentsList'
+import AddComment from '../components/AddComment'
 
 
 const Article = () => {
@@ -34,9 +36,10 @@ const Article = () => {
       {article.content.map((paragraph, index)=>{
         return <p className='mx-auto leading-relaxed text-base mb-4 ' key={index}>{paragraph}</p>
       }
-        
+    
       )}
       <CommentsList comments={articleInfo.comments}/>
+      <AddComment articleName={name} setArticleInfo={setArticleInfo}/>
       <h1 className='sm:text-2xl text-xl font-bold my-4 text-gray-900'>Other Articles</h1>
       <div className='flex flex-wrap -m-4 '>
         <Articles  articles={otherArticles}/>
